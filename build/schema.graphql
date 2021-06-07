@@ -1,0 +1,29 @@
+type Aggregation @entity {
+  id: ID!
+  totalDeposits: BigInt
+  totalDepositors: BigInt
+  totalAmountDeposited: BigInt
+}
+
+type Depositor @entity {
+  id: ID!
+  totalAmountDeposited: BigInt
+  depositCount: BigInt
+  deposits: [Deposit!] @derivedFrom(field: "depositor")
+}
+
+type DailyDeposit @entity {
+  id: ID!
+  dailyAmountDeposited: BigInt
+  dailyDepositCount: BigInt
+}
+
+type Deposit @entity {
+  id: ID!
+  dayID: String!
+  depositor: Depositor
+  pubkey: Bytes!
+  withdrawal_credentials: Bytes!
+  amount: BigInt!
+  timestamp: BigInt!
+}
