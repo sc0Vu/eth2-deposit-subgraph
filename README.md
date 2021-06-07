@@ -1,5 +1,5 @@
 # eth2-deposit-subgraph
-
+[![CI](https://github.com/sc0Vu/eth2-deposit-subgraph/actions/workflows/CI.yml/badge.svg)](https://github.com/sc0Vu/eth2-deposit-subgraph/actions/workflows/CI.yml)
 
 Provide the historical and analytics data for Eth2 deposit.
 
