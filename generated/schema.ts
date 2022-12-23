@@ -20,22 +20,24 @@ export class Aggregation extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Aggregation entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Aggregation entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Aggregation", id.toString(), this);
+    assert(id != null, "Cannot save Aggregation entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Aggregation entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Aggregation", id.toString(), this);
+    }
   }
 
   static load(id: string): Aggregation | null {
-    return store.get("Aggregation", id) as Aggregation | null;
+    return changetype<Aggregation | null>(store.get("Aggregation", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -44,7 +46,7 @@ export class Aggregation extends Entity {
 
   get totalDeposits(): BigInt | null {
     let value = this.get("totalDeposits");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -52,16 +54,16 @@ export class Aggregation extends Entity {
   }
 
   set totalDeposits(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("totalDeposits");
     } else {
-      this.set("totalDeposits", Value.fromBigInt(value as BigInt));
+      this.set("totalDeposits", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get totalDepositors(): BigInt | null {
     let value = this.get("totalDepositors");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -69,16 +71,16 @@ export class Aggregation extends Entity {
   }
 
   set totalDepositors(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("totalDepositors");
     } else {
-      this.set("totalDepositors", Value.fromBigInt(value as BigInt));
+      this.set("totalDepositors", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get totalAmountDeposited(): BigInt | null {
     let value = this.get("totalAmountDeposited");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -86,10 +88,10 @@ export class Aggregation extends Entity {
   }
 
   set totalAmountDeposited(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("totalAmountDeposited");
     } else {
-      this.set("totalAmountDeposited", Value.fromBigInt(value as BigInt));
+      this.set("totalAmountDeposited", Value.fromBigInt(<BigInt>value));
     }
   }
 }
@@ -102,22 +104,24 @@ export class Depositor extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Depositor entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Depositor entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Depositor", id.toString(), this);
+    assert(id != null, "Cannot save Depositor entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Depositor entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Depositor", id.toString(), this);
+    }
   }
 
   static load(id: string): Depositor | null {
-    return store.get("Depositor", id) as Depositor | null;
+    return changetype<Depositor | null>(store.get("Depositor", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -126,7 +130,7 @@ export class Depositor extends Entity {
 
   get totalAmountDeposited(): BigInt | null {
     let value = this.get("totalAmountDeposited");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -134,16 +138,16 @@ export class Depositor extends Entity {
   }
 
   set totalAmountDeposited(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("totalAmountDeposited");
     } else {
-      this.set("totalAmountDeposited", Value.fromBigInt(value as BigInt));
+      this.set("totalAmountDeposited", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get depositCount(): BigInt | null {
     let value = this.get("depositCount");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -151,16 +155,16 @@ export class Depositor extends Entity {
   }
 
   set depositCount(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("depositCount");
     } else {
-      this.set("depositCount", Value.fromBigInt(value as BigInt));
+      this.set("depositCount", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get deposits(): Array<string> | null {
     let value = this.get("deposits");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -168,10 +172,10 @@ export class Depositor extends Entity {
   }
 
   set deposits(value: Array<string> | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("deposits");
     } else {
-      this.set("deposits", Value.fromStringArray(value as Array<string>));
+      this.set("deposits", Value.fromStringArray(<Array<string>>value));
     }
   }
 }
@@ -184,22 +188,24 @@ export class DailyDeposit extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save DailyDeposit entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save DailyDeposit entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("DailyDeposit", id.toString(), this);
+    assert(id != null, "Cannot save DailyDeposit entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save DailyDeposit entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("DailyDeposit", id.toString(), this);
+    }
   }
 
   static load(id: string): DailyDeposit | null {
-    return store.get("DailyDeposit", id) as DailyDeposit | null;
+    return changetype<DailyDeposit | null>(store.get("DailyDeposit", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -208,7 +214,7 @@ export class DailyDeposit extends Entity {
 
   get dailyAmountDeposited(): BigInt | null {
     let value = this.get("dailyAmountDeposited");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -216,16 +222,16 @@ export class DailyDeposit extends Entity {
   }
 
   set dailyAmountDeposited(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("dailyAmountDeposited");
     } else {
-      this.set("dailyAmountDeposited", Value.fromBigInt(value as BigInt));
+      this.set("dailyAmountDeposited", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get dailyDepositCount(): BigInt | null {
     let value = this.get("dailyDepositCount");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -233,10 +239,10 @@ export class DailyDeposit extends Entity {
   }
 
   set dailyDepositCount(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("dailyDepositCount");
     } else {
-      this.set("dailyDepositCount", Value.fromBigInt(value as BigInt));
+      this.set("dailyDepositCount", Value.fromBigInt(<BigInt>value));
     }
   }
 }
@@ -245,26 +251,34 @@ export class Deposit extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("dayID", Value.fromString(""));
+    this.set("pubkey", Value.fromBytes(Bytes.empty()));
+    this.set("withdrawal_credentials", Value.fromBytes(Bytes.empty()));
+    this.set("amount", Value.fromBigInt(BigInt.zero()));
+    this.set("timestamp", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Deposit entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Deposit entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Deposit", id.toString(), this);
+    assert(id != null, "Cannot save Deposit entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Deposit entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Deposit", id.toString(), this);
+    }
   }
 
   static load(id: string): Deposit | null {
-    return store.get("Deposit", id) as Deposit | null;
+    return changetype<Deposit | null>(store.get("Deposit", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -273,7 +287,7 @@ export class Deposit extends Entity {
 
   get dayID(): string {
     let value = this.get("dayID");
-    return value.toString();
+    return value!.toString();
   }
 
   set dayID(value: string) {
@@ -282,7 +296,7 @@ export class Deposit extends Entity {
 
   get depositor(): string | null {
     let value = this.get("depositor");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -290,16 +304,16 @@ export class Deposit extends Entity {
   }
 
   set depositor(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("depositor");
     } else {
-      this.set("depositor", Value.fromString(value as string));
+      this.set("depositor", Value.fromString(<string>value));
     }
   }
 
   get pubkey(): Bytes {
     let value = this.get("pubkey");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set pubkey(value: Bytes) {
@@ -308,7 +322,7 @@ export class Deposit extends Entity {
 
   get withdrawal_credentials(): Bytes {
     let value = this.get("withdrawal_credentials");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set withdrawal_credentials(value: Bytes) {
@@ -317,7 +331,7 @@ export class Deposit extends Entity {
 
   get amount(): BigInt {
     let value = this.get("amount");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set amount(value: BigInt) {
@@ -326,7 +340,7 @@ export class Deposit extends Entity {
 
   get timestamp(): BigInt {
     let value = this.get("timestamp");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set timestamp(value: BigInt) {
